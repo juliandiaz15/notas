@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNotas | Sistema Académico</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">📚</div>
+            <div>
+                <h1>EduNotas</h1>
+                <span>Sistema de gestión académica</span>
+            </div>
+        </div>
+        <div class="header-label">
+            <span class="status-dot"></span>
+            Plataforma académica
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <div>
+                <span class="welcome-tag">🎓 PANEL ESTUDIANTIL</span>
+                <h2>¡Bienvenido al sistema de notas!</h2>
+                <p>Registra las calificaciones y conoce el rendimiento académico del estudiante.</p>
+            </div>
+            <div class="welcome-illustration">📖</div>
+        </section>
+
+        <div class="content-grid">
+
+            <section class="form-card">
+                <div class="section-heading">
+                    <div class="heading-icon">👨‍🎓</div>
+                    <div>
+                        <h3>Información del estudiante</h3>
+                        <p>Completa los datos personales</p>
+                    </div>
+                </div>
+
+                <form id="gradeForm">
+
+                    <div class="input-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" placeholder="Ej. Juan" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" id="apellido" placeholder="Ej. Pérez" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="carrera">Carrera</label>
+                        <input type="text" id="carrera" placeholder="Ej. Ingeniería de Sistemas" required>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="section-heading grades-heading">
+                        <div class="heading-icon yellow">📝</div>
+                        <div>
+                            <h3>Calificaciones</h3>
+                            <p>Ingresa las cinco notas del estudiante</p>
+                        </div>
+                    </div>
+
+                    <div class="grades-grid">
+                        <div class="input-group">
+                            <label for="nota1">Nota 1</label>
+                            <input type="number" id="nota1" placeholder="0.0" min="0" max="5" step="0.1" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="nota2">Nota 2</label>
+                            <input type="number" id="nota2" placeholder="0.0" min="0" max="5" step="0.1" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="nota3">Nota 3</label>
+                            <input type="number" id="nota3" placeholder="0.0" min="0" max="5" step="0.1" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="nota4">Nota 4</label>
+                            <input type="number" id="nota4" placeholder="0.0" min="0" max="5" step="0.1" required>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="nota5">Nota 5</label>
+                            <input type="number" id="nota5" placeholder="0.0" min="0" max="5" step="0.1" required>
+                        </div>
+                    </div>
+
+                    <div class="grading-info">
+                        <span>ℹ️</span>
+                        <p>La escala de calificación va de <strong>0.0 a 5.0</strong>. Se aprueba con una nota mínima de <strong>3.5</strong>.</p>
+                    </div>
+
+                    <div id="errorMessage" class="error-message" role="alert"></div>
+
+                    <button type="submit" class="calculate-btn">
+                        <span>Calcular definitiva</span>
+                        <span>➜</span>
+                    </button>
+
+                    <button type="reset" class="reset-btn">
+                        ↻ Limpiar formulario
+                    </button>
+
+                </form>
+            </section>
+
+            <section class="results-card" id="resultsCard">
+                <div class="results-top">
+                    <div>
+                        <span class="result-tag">📊 RESULTADOS</span>
+                        <h3>Reporte académico</h3>
+                        <p>Resumen del rendimiento estudiantil</p>
+                    </div>
+                    <div class="report-icon">📋</div>
+                </div>
+
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">📚</div>
+                    <h3>¡Esperando resultados!</h3>
+                    <p>Ingresa los datos del estudiante y sus cinco calificaciones para generar el reporte académico.</p>
+                </div>
+
+                <div id="report" class="report hidden">
+
+                    <div class="student-info">
+                        <span class="small-label">ESTUDIANTE</span>
+                        <h3 id="studentName">Nombre del estudiante</h3>
+                        <p id="studentCareer">Carrera</p>
+                    </div>
+
+                    <div class="average-box">
+                        <span class="small-label">NOTA DEFINITIVA</span>
+                        <div class="average-number" id="average">0.00</div>
+                        <div class="average-scale">De 5.00 puntos</div>
+                        <div id="status" class="status-badge">Estado</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-box approved-stat">
+                            <span class="stat-icon">✅</span>
+                            <strong id="approved">0</strong>
+                            <span>Aprobadas</span>
+                        </div>
+                        <div class="stat-box failed-stat">
+                            <span class="stat-icon">❌</span>
+                            <strong id="failed">0</strong>
+                            <span>Reprobadas</span>
+                        </div>
+                    </div>
+
+                    <div class="individual-grades">
+                        <h4>Detalle de calificaciones</h4>
+                        <div id="gradesList"></div>
+                    </div>
+
+                    <div id="finalMessage" class="final-message"></div>
+
+                    <button id="newStudentBtn" class="new-student-btn">
+                        + Registrar otro estudiante
+                    </button>
+
+                </div>
+            </section>
+
+        </div>
+
+        <footer>
+            <p>🎓 EduNotas © 2026 | Sistema de gestión de calificaciones</p>
+            <span>Aprender, crecer y alcanzar el éxito.</span>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
